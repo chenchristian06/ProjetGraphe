@@ -14,7 +14,6 @@ typedef struct cellule* Liste;
 
 Liste creer_liste(void);
 int liste_vide(Liste l);
-void visualiser(Liste l);
 Liste ajout_tete(int k,Liste l);
 Liste supprimer_tete(Liste l);
 void  liberer(Liste  l);

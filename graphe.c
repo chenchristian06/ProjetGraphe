@@ -19,7 +19,7 @@ void visualiser_graphe(T_SOMMET* g,int* pnb_sommets,int* pnb_arcs){
     int i = 0;
     for(;i<*pnb_sommets;i++){
         printf("le nom du sommet est : %s \n en x = %lf y= %lf \n",g[i].nom,g[i].x,g[i].y);
-        L_ARC l=creer_liste();
+        L_ARC l=creer_L_ARC();
         l=g[i].voisins;
         printf("Listes des voisins et cout associe \n");
         while(l!=NULL){
@@ -37,7 +37,7 @@ L_ARC ajout_teteG(T_ARC k,L_ARC l){
     return nv_liste;
 }
 
-L_ARC creer_liste(){
+L_ARC creer_L_ARC(){
     return NULL;
 }
 
@@ -64,7 +64,7 @@ T_SOMMET* creation_graphe(T_SOMMET* g,char* nom_fichier,int* pnb_sommets,int* pn
         fgets(mot,511,f);
         g[i].nom=calloc(512,sizeof(char));
         strcpy(g[i].nom,mot);
-        g[i].voisins=creer_liste();
+        g[i].voisins=creer_L_ARC();
     }
     fgets(mot,511,f); // On passe aux arcs
     for(i=0;i<nb_arcs;i++){// On rentre tous les arcs partant du sommet i

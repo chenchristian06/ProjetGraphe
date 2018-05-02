@@ -33,7 +33,7 @@ typedef struct{
 T_SOMMET* creer_graphe(void);
 T_SOMMET* creation_graphe(T_SOMMET* g,char* nom_fichier,int* pnb_sommets,int* pnb_arcs);
 L_ARC ajout_teteG(T_ARC k,L_ARC l);
-L_ARC creer_liste(void);
+L_ARC creer_L_ARC(void);
 void visualiser_graphe(T_SOMMET* g,int* pnb_sommets,int* pnb_arcs);
 
 #endif /* graph_h */

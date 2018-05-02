@@ -5,7 +5,6 @@
 //  Created by Chen Christian on 13/04/2018.
 //  Copyright © 2018 Chen Christian. All rights reserved.
 //
-#include "liste.h"
 #include "dijkstra.h"
 #include <stdio.h>
 #include <stdlib.h>
@@ -21,20 +20,21 @@ int* creer_pere(int nb_sommets){
     return tab_pere;
 }
 
-int* creer_poids(int nb_sommets){
+double* creer_poids(int nb_sommets){
     /*on crée le tableau des poids où l'indice représente le numéro du sommet le la valeur le poids */
-    int* tab_poids;
+    double* tab_poids;
     tab_poids = calloc(nb_sommets,sizeof(*tab_poids));
     int i;
     for(i=0;i<nb_sommets;i++){
-        tab_poids[i]=-1;
+        tab_poids[i]=0xffffffff;
     }
     return tab_poids;
 }
 
-void depart_poids(int i, int* tab_poids){
+double* depart_poids(int i, double* tab_poids){
     /*Ici on choisit le point de départ */
     tab_poids[i]=0;
+    return tab_poids;
 }
 
 Liste creation_pas_visite(int nb_sommets){
@@ -74,11 +74,11 @@ Liste supprime_liste(Liste l,int x){
     }
 }
 
-int recherche_min(int* l,int nb_sommets){
+int recherche_min(double* l,int nb_sommets,Liste C){
     int imin = 0;
     int i;
     for(i=1;i<nb_sommets;i++){
-        if(l[i]<l[imin]){
+        if((l[i]<l[imin])&&!(test_presence(C,i))){
             imin = i;
         }
     }

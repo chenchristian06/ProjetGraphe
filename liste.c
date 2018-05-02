@@ -17,15 +17,7 @@ int liste_vide(Liste l){
     if(l) return 1;
     else return 0;
 }
-//affiche les éléments de la liste
-void visualiser(Liste l){
-    Liste p=l;
-    while(p!=NULL){
-        affiche(&(p->val));
-        p=p->suiv;
-    }
-puts("\n");
-}
+
 //Ajoute un élément en tête de la liste
 Liste ajout_tete(int k,Liste l){
     Liste nv_liste = malloc(sizeof(*nv_liste));
