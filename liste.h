@@ -7,19 +7,20 @@
 //
 #define liste_h
 struct cellule {
-    int val;
+    long val;
     struct cellule * suiv;} ;
 
 typedef struct cellule* Liste;
 
 Liste creer_liste(void);
-int liste_vide(Liste l);
-Liste ajout_tete(int k,Liste l);
+long liste_vide(Liste l);
+Liste ajout_tete(long k,Liste l);
 Liste supprimer_tete(Liste l);
 void  liberer(Liste  l);
-Liste ajout_queue(int k , Liste l);
+Liste ajout_queue(long k , Liste l);
 Liste concat(Liste l1, Liste l2);
 Liste copie(Liste l1);
-Liste supprimen(int n, Liste l);
+Liste supprimen(long n, Liste l);
+void affichage(Liste l);
 
 

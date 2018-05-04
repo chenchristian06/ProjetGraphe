@@ -13,13 +13,13 @@ Liste creer_liste(void){
     return NULL;
 }
 
-int liste_vide(Liste l){
+long liste_vide(Liste l){
     if(l) return 1;
     else return 0;
 }
 
 //Ajoute un élément en tête de la liste
-Liste ajout_tete(int k,Liste l){
+Liste ajout_tete(long k,Liste l){
     Liste nv_liste = malloc(sizeof(*nv_liste));
     nv_liste->val = k;
     nv_liste->suiv = l;
@@ -41,7 +41,7 @@ void liberer(Liste l){
     }
 }
 // ajoute un élément en queue
-Liste ajout_queue(int k, Liste l){
+Liste ajout_queue(long k, Liste l){
     Liste p = l;
     Liste nv = malloc(sizeof(*nv));
     nv->val = k;
@@ -81,8 +81,8 @@ Liste copie(Liste l1){
     return NULL;
 }
 
-Liste supprimen(int n, Liste l){
-    int p = n;
+Liste supprimen(long n, Liste l){
+    long p = n;
     Liste q1 = l;
     while(p!=1){
         p-=1;
@@ -96,4 +96,20 @@ Liste supprimen(int n, Liste l){
     free(q1->suiv);
     q1->suiv = q2->suiv;
     return l;
+}
+
+void affichage(Liste l){
+    if(!l){
+        printf("la liste est vide");
+        
+    }
+    else{
+        Liste t = l;
+        printf("[");
+        while(t!=NULL){
+            printf(" %ld ",t->val);
+            t = t->suiv;
+        }
+        printf("]");
+    }
 }

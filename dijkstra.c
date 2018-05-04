@@ -9,37 +9,37 @@
 #include <stdio.h>
 #include <stdlib.h>
 //Dijkstra
-int* creer_pere(int nb_sommets){
+long* creer_pere(long nb_sommets){
 /*on créer un tableau de pere ou l'indice est le pere et le contenu est l'antécédent*/
-    int* tab_pere;
-    tab_pere = calloc(nb_sommets,sizeof(int));
-    int i = 0;
+    long* tab_pere;
+    tab_pere = calloc(nb_sommets,sizeof(long));
+    long i = 0;
     for(;i<nb_sommets;i++){
         *(tab_pere+i) = -1;
     }
     return tab_pere;
 }
 
-double* creer_poids(int nb_sommets){
+double* creer_poids(long nb_sommets){
     /*on crée le tableau des poids où l'indice représente le numéro du sommet le la valeur le poids */
     double* tab_poids;
     tab_poids = calloc(nb_sommets,sizeof(*tab_poids));
-    int i;
+    long i;
     for(i=0;i<nb_sommets;i++){
         tab_poids[i]=0xffffffff;
     }
     return tab_poids;
 }
 
-double* depart_poids(int i, double* tab_poids){
-    /*Ici on choisit le point de départ */
+double* depart_poids(long i, double* tab_poids){
+    /*Ici on choisit le polong de départ */
     tab_poids[i]=0;
     return tab_poids;
 }
 
-Liste creation_pas_visite(int nb_sommets){
+Liste creation_pas_visite(long nb_sommets){
     /* on crée la liste des sommets pas encore visité */
-    int i;
+    long i;
     Liste l = creer_liste();
     for(i=0;i<nb_sommets;i++){
         ajout_tete(i,l);
@@ -52,7 +52,7 @@ Liste creation_deja_visite(void){
     return creer_liste();
 }
 
-Liste supprime_liste(Liste l,int x){
+Liste supprime_liste(Liste l,long x){
     /* on recherche et on élimine l'élément x dans la lsite l*/
     if(!l){
         return NULL;
@@ -74,18 +74,20 @@ Liste supprime_liste(Liste l,int x){
     }
 }
 
-int recherche_min(double* l,int nb_sommets,Liste C){
-    int imin = 0;
-    int i;
-    for(i=1;i<nb_sommets;i++){
-        if((l[i]<l[imin])&&!(test_presence(C,i))){
+long recherche_min(double* l,long nb_sommets,Liste C){
+    long min = 0xfffff;
+    long imin;
+    long i;
+    for(i = 0;i<nb_sommets;i++){
+        if((l[i]<min)&&!(test_presence(C,i))){
             imin = i;
+            min = l[i];
         }
     }
     return imin;
 }
 
-int test_presence(Liste l, int x){
+long test_presence(Liste l, long x){
     /* test si x est présent dans l */
     if(!l){
         return 0;
