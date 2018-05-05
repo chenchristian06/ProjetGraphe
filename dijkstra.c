@@ -75,11 +75,11 @@ Liste supprime_liste(Liste l,long x){
 }
 
 long recherche_min(double* l,long nb_sommets,Liste C){
-    long min = 0xfffff;
-    long imin;
+    long min = 0xfffff;//Initialisation du min à l'infini
+    long imin=-1; //Valeur par défaut si tous les poids non visités sont infini
     long i;
     for(i = 0;i<nb_sommets;i++){
-        if((l[i]<min)&&!(test_presence(C,i))){
+        if((l[i]<=min)&&!(test_presence(C,i))){
             imin = i;
             min = l[i];
         }

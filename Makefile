@@ -1,15 +1,13 @@
-CFLAGS=-W -Wall -ansi -pedantic
-LDFLAGS= 
-EXEC = main
-all : $(EXEC)
+CFLAGS=-c -g 
+LDFLAGS=
 
-main : graphe.o main.o liste.o dijkstra.o
-	gcc -o $@ $^ $(LDFLAGS)
-%.o : %.c
-	gcc -o $@ -c $< $(CFLAGS)
-clean:
-	rm -rf *.o
+all: main
 
-mrproper: clean
-	rm -rf &(EXEC)
+main: graphe.o liste.o dijkstra.o main.o
+	gcc  -o $@ $^ $(LDFLAGS)
 
+%.o: %.c
+	gcc $(CFLAGS) $< 
+
+clean :
+	rm *.o $^

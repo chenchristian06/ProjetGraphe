@@ -14,7 +14,7 @@ int main(){
     //char nom_fichier[512];
     //printf("Veuillez spécifier le nom de fichier où extraire le graphe \n ");
     //scanf("%s",nom_fichier);
-    char* nom_fichier="/Users/chenchristian/Desktop/Projet1A/Projet1A/grapheNewYork.csv";
+    char* nom_fichier="grapheColorado.csv";
     g = creer_graphe();
     long nb_sommets;
     long nb_arcs;
@@ -43,25 +43,33 @@ int main(){
     pas_visite = creation_pas_visite(nb_sommets);
     do{
         j = recherche_min(pcc, nb_sommets,deja_visite);
-        pas_visite = supprime_liste(pas_visite, j);
-        deja_visite = ajout_tete(j, deja_visite);
-        L_ARC l = g[j].voisins;
-        while(l!=NULL){
-            long k = (l->val).arrivee;
-            double cjk = (l->val).cout;
-            if(pcc[k]>pcc[j] + cjk ){
-                pcc[k] = pcc[j] + cjk;
-                pere[k] = j;
-            }
-            l = l->suiv;
+        if(j!=-1){ 
+        	pas_visite = supprime_liste(pas_visite, j);
+        	deja_visite = ajout_tete(j, deja_visite);
+        	L_ARC l = g[j].voisins;
+       	 while(l!=NULL){
+            	long k = (l->val).arrivee;
+            	double cjk = (l->val).cout;
+            	if(pcc[k]>pcc[j] + cjk ){
+               	 pcc[k] = pcc[j] + cjk;
+                	pere[k] = j;
+           	 }
+            	l = l->suiv;
+    	  	}
         }
-   }while((!test_presence(deja_visite,arrivee))&&(pcc[j]!=0xffffffff));
-    printf("%ld <- ",arrivee);
+   }while((j!=arrivee)&&j!=-1); // Si j=-1, le sommet n'a plus de voisin => pas de chemin possible
+	if(j!=arrivee){
+		puts("Pas de chemin possible \n");
+   }
+   else{
+    printf("fin <-%ld <- ",arrivee);
     long x=arrivee;
     do{
         printf("%ld <- ",pere[x]);
 		x=pere[x];
 	}while(x!=depart);
+   puts("début\n");
+   }
     //Affichage tableau
     /* printf(" voici le tableau père: [");
 	for(i=0;i<nb_sommets;i++){
