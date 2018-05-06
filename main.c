@@ -8,13 +8,14 @@
 
 #include "graphe.h"
 #include "dijkstra.h"
+#include "hachage.h"
 int main(){
 /*---DEBUT CREATION GRAPHE---*/
     T_SOMMET* g;
     //char nom_fichier[512];
     //printf("Veuillez spécifier le nom de fichier où extraire le graphe \n ");
     //scanf("%s",nom_fichier);
-    char* nom_fichier="grapheColorado.csv";
+    char* nom_fichier="C:/Users/Tanguy/Downloads/graphe1.txt";
     g = creer_graphe();
     long nb_sommets;
     long nb_arcs;
@@ -22,7 +23,7 @@ int main(){
     //visualiser_graphe(g,&nb_sommets,&nb_arcs);
     //printf("le graphe crée\n");
 /*---FIN---*/
-    
+
 /*---DEBUT DIJKSTRA---*/
     long depart;
     long arrivee;
@@ -43,7 +44,7 @@ int main(){
     pas_visite = creation_pas_visite(nb_sommets);
     do{
         j = recherche_min(pcc, nb_sommets,deja_visite);
-        if(j!=-1){ 
+        if(j!=-1){
         	pas_visite = supprime_liste(pas_visite, j);
         	deja_visite = ajout_tete(j, deja_visite);
         	L_ARC l = g[j].voisins;
@@ -76,7 +77,23 @@ int main(){
    	printf("%ld ",pere[i]);
     }
     printf("]"); */
-    
+   H_Liste* table=NULL;
+   table=remplissage_table(table,g,nb_sommets);
+   visualiser_table(table,nb_sommets);
+   char nom[3]="Aaa";
+   T_SOMMET* S;
+   S=calloc(1,sizeof(*S));
+   S->nom=calloc(512,sizeof(char));
+   *S=rechercher(nom,table,nb_sommets);
+   printf("%s %lf %lf\n",S->nom,S->x,S->y);
+   L_ARC l=creer_L_ARC();
+        l=S->voisins;
+        printf("Listes des voisins et cout associe \n");
+        while(l!=NULL){
+            printf("voisin:%ld,cout:%lf \n",(l->val).arrivee,(l->val).cout);
+            l=l->suiv;
+        }
+
     //fin
 }
 /*---FIN---*/
