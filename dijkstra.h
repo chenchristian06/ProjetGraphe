@@ -8,13 +8,12 @@
 
 #ifndef dijkstra_h
 #define dijkstra_h
-#include"liste.h"
-
+#include "tas.h"
+#include "graphe.h"
 
 
 long* creer_pere(long nb_sommets);
-double* creer_poids(long nb_sommets);
-double* depart_poids(long i, double* tab_poids);
+TAS* creer_poids(long nb_sommets, long depart, T_SOMMET* graphe);
 Liste creation_pas_visite(long nb_sommets);
 Liste creation_deja_visite(void);
 Liste supprime_liste(Liste l,long x);
