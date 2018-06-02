@@ -28,7 +28,7 @@ long hachage(char* nom_sommet,long N){
     long i;
     if(nom_sommet[1]=='\0') return h%N;
     for(i=1;i<l;i++){
-        h+=nom_sommet[i]*(((a*puissance(b,i)%(N-1))));
+        h+=nom_sommet[i]*(((a*puissance(b,i)%(N-1))));//hachage universel
     }
     return h%N;
 }
@@ -45,9 +45,11 @@ H_Liste* remplissage_table(H_Liste* tab,T_SOMMET* g,long n){
 
 void visualiser_table(H_Liste* tab,long n){
     long i;
+    printf("[");
     for(i=0;i<n;i++){
         affichage_H(tab[i]);
     }
+    printf("]\n");
 }
 
 
@@ -59,9 +61,10 @@ void affichage_H(H_Liste l){
     else{
         H_Liste t = l;
         while(t!=NULL){
-            printf("%s ",(t->sommet).nom);
+            printf("%s, ",(t->sommet).nom);
             t = t->suiv;
         }
+        printf("\n");
     }
 }
 

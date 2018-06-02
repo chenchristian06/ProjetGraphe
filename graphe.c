@@ -44,12 +44,10 @@ L_ARC creer_L_ARC(){
 void supprime_retour(char* s){
     int l=strlen(s);
     char* p= strchr(s,'\n');
-    if(p) *p=0;
+    if(p) *p=0;//Suppression du \n
     int i;
-    //printf("%d ",s[0]);
-    while(*s==32 || *s==9){
+    while(*s==32 || *s==9){//Supression des espaces ou tabulation de début de chaine
         for (i=0;i<l-1;i++){
-           //printf("%c ",s[i+1]);
            s[i]=s[i+1];
         }
         l--;
@@ -71,6 +69,7 @@ void reset_arc(T_SOMMET* g,long* H){
 }
 
 void resultat(T_SOMMET* g,long* pere,long depart,long arrivee,long nb_sommets,int num){
+    /*--CREATION DU CHEMIN A PARTIR DE PERE--*/
     long x=arrivee;
     Liste chemin=calloc(nb_sommets,sizeof(*chemin));
     chemin=ajout_tete(x,chemin);
@@ -78,6 +77,7 @@ void resultat(T_SOMMET* g,long* pere,long depart,long arrivee,long nb_sommets,in
        chemin=ajout_tete(pere[x],chemin);
         x=pere[x];
     }while(x!=depart);
+    /*--AFFICHAGE DU CHEMIN--*/
     Liste p=chemin->suiv;
     if(num==9) printf("Depart: %s\n",g[chemin->val].nom);
     else printf("Depart: %s ->",g[chemin->val].nom);
@@ -112,7 +112,7 @@ T_SOMMET* creation_graphe(T_SOMMET* g,char* nom_fichier,long* pnb_sommets,long* 
     *pnb_arcs= nb_arcs;
     fgets(mot,511,f); // On saute la deuxième ligne
     g=calloc(nb_sommets,sizeof(T_SOMMET)); // Création du graphe
-    for(i=0;i<nb_sommets;i++){ // On rentre la lat,long et nom de chaque sommet
+    for(i=0;i<nb_sommets;i++){ // On rentre la lat,long,ligne et nom de chaque sommet
         fscanf(f,"%ld %lf %lf %s",&numero, &(g[i].x), &(g[i].y),ligne);
         g[i].ligne=calloc(128,sizeof(char));
         strcpy(g[i].ligne,ligne);
@@ -120,7 +120,6 @@ T_SOMMET* creation_graphe(T_SOMMET* g,char* nom_fichier,long* pnb_sommets,long* 
         g[i].position_graphe=i;
         fgets(mot,511,f);
         supprime_retour(mot);
-        //printf("%s\n",mot);
         g[i].nom=calloc(512,sizeof(char));
         strcpy(g[i].nom,mot);
         g[i].voisins=creer_L_ARC();
